@@ -1,5 +1,8 @@
 from openpyxl import load_workbook
-wb = load_workbook("friends.xlsx")
+
+file_name = input("Enter file name(extension=xlsx): ")
+
+wb = load_workbook(file_name)
 ws = wb.active
 
 rows = []
@@ -29,10 +32,7 @@ for header in headers:
 	SQL2 = SQL2 + "`" + header + "`,"
 SQL2 = SQL2[:-1]
 
-
 SQL2 = SQL2 + ") VALUES "
-
-
 
 for row in rows:
 	SQL2 = SQL2 + "("
@@ -42,10 +42,11 @@ for row in rows:
 	SQL2 = SQL2 + "),"
 SQL2 = SQL2[:-1]
 
-
 SQL2 = SQL2 + ";"
 
-
 print(SQL)
-
 print(SQL2)
+
+op = open("output.txt",'w+')
+op.write(SQL + "\n" + SQL2);
+op.close()
